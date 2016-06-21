@@ -9,8 +9,8 @@ import java.util.Set;
 public class HraKamene {
 
 	// unfortunatelly only squares
-	int riadky = 2;
-	int stlpce = 2;
+	int riadky = 4;
+	int stlpce = 4;
 	int[][] pole = new int[riadky][stlpce];
 	long timeOfStart = 0;
 	long actualTime = 0;
@@ -65,7 +65,7 @@ public class HraKamene {
 		return pole;
 	}
 
-	void vykresleniePola() {
+	void vykresleniePola() throws WrongInputForStart {
 		for (int row = 0; row < riadky; row++) {
 			for (int column = 0; column < stlpce; column++) {
 				if (pole[column][row] < 10 && pole[column][row] > 0) {
@@ -100,10 +100,20 @@ public class HraKamene {
 			System.out.println("Èas hrania je: " + timeOfPlaying + " sek.");
 			System.out.println("-------------------------");
 			System.exit(0);
+		} else if (userInput.equals("W")) {
+			System.out.println("posun hore");
+		} else if (userInput.equals("S")) {
+			System.out.println("posun dole");
+		} else if (userInput.equals("A")) {
+			System.out.println("posun dolava");
+		} else if (userInput.equals("D")) {
+			System.out.println("posun doprava");
+		} else {
+			throw new WrongInputForStart("Zly vstup pre end alebo posun.");
 		}
 	}
 
-	public void newGameStarted() {
+	public void newGameStarted() throws WrongInputForStart {
 		System.out.println("For starting game enter 'NEW':");
 		String newGame = readLine();
 		if (newGame.equals("NEW")) {
@@ -116,6 +126,8 @@ public class HraKamene {
 				System.out.println("Èas hrania je: " + timeOfPlaying + " sek.");
 				System.out.println("-------------------------");
 			} while (true);
+		} else {
+			throw new WrongInputForStart("Zly vstup pre start game.");
 		}
 	}
 
